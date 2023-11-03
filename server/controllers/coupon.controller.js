@@ -1,15 +1,21 @@
 import Coupon from "../models/coupon.js"
 
-// Create a new coupon
+// Create a new coupon ✅ ref not wrk instead str
 const newCoupon = async (req, res) => {
     try {
+        if (req.body) {
+            console.log("body of copon ", req.body)
+        } else {
+            console.log("no body of copon..");
+        }
         const newCoupon = await Coupon.create(req.body);
+        console.log(newCoupon, req.body);
         res.status(201).json(newCoupon);
     } catch (error) {
-        res.status(400).json({ error: 'Coupon creation failed' });
+        res.status(400).json({ error: 'Coupon creation failed', message: error.message });
     }
 };
-
+// check coupun status  is valid the return discount  ✅
 const verifyCoupon = async (req, res) => {
     try {
         const { couponCode, orderTotal } = req.body;
@@ -48,16 +54,15 @@ const verifyCoupon = async (req, res) => {
         res.status(500).json({ error: 'Coupon verification failed' });
     }
 };
-// Apply a coupon
+// Apply a coupon ✅
 const applyCoupon = async (req, res) => {
     try {
         const { couponCode, orderTotal } = req.body;
-
-        // Find the coupon by code
-        const coupon = await couponModel.findOne({ couponCode });
-
+        const coupon = await Coupon.findOne({ couponCode });
         if (!coupon) {
             return res.status(404).json({ error: 'Coupon not found' });
+        } else {
+            console.log("coupon data : ", coupon, "body : ", req.body)
         }
 
         const currentDate = new Date();
@@ -91,7 +96,7 @@ const applyCoupon = async (req, res) => {
     }
 };
 
-// Get coupon data based on coupon code
+// Get coupon data based on coupon code ✅
 const getCouponData = async (req, res) => {
     const couponCode = req.params.couponCode;
     try {
@@ -106,7 +111,7 @@ const getCouponData = async (req, res) => {
     }
 };
 
-// Edit coupon data
+// Edit coupon data ✅
 const EditCouponData = async (req, res) => {
     const couponCode = req.params.couponCode;
     try {

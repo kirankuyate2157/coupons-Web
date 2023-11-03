@@ -10,6 +10,8 @@ import couponRouter from "./routes/coupon.routes.js";
 
 const app = express();
 app.use(cors()); // api security enhancing  purpose..
+app.use(express.json());
+
 
 app.get("/", (req, res) => {
     res.send({ message: "Hello World ! my name is kiran.dev" }); //route response on root
