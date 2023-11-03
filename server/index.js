@@ -12,7 +12,7 @@ const app = express();
 app.use(cors()); // api security enhancing  purpose..
 app.use(express.json());
 
-
+// checking ..
 app.get("/", (req, res) => {
     res.send({ message: "Hello World ! my name is kiran.dev" }); //route response on root
 });
@@ -28,7 +28,7 @@ app.use("/kkcoupon/api/v1/coupons", couponRouter);
 const StartServer = async () => {
     try {
         //connect to data base via URL
-        mongoose.set("strictQuery", true);
+        mongoose.set("strictQuery", true); // by default also true 
         mongoose
             .connect(process.env.MONGODB_URL)
             .then(() => console.log("Connected to DB 🪖..."))
