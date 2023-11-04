@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FaRegCopy } from "react-icons/fa";
-const DiscCard = () => {
+import { MdFlashOn } from "react-icons/md";
+const DiscCard = ({ onClick }) => {
     const [isTextCopy, setIsTextCopy] = useState(false);
     const copyInterval = () => {
         setIsTextCopy(true);
         setTimeout(() => {
             setIsTextCopy(false);
-        }, 2000); // Reduce the time for the copy notification
+        }, 7000); // Reduce the time for the copy notification
     }
     return (
-        <div className="p-4 sm:p-5 font-sans border border-gray-400 bg-slate-100  shadow-lg rounded-lg sm:w-1/2 md:w-[48%] lg:w-[30%]">
+        <div className="p-4 sm:p-5 font-sans border border-gray-400 bg-slate-50  shadow-lg rounded-lg sm:w-1/2 md:w-[48%] lg:w-[30%]"
+
+            onClick={onClick}>
             <div className="flex flex-col gap-4 pb-2 ">
                 <div className="text-2xl sm:text-3xl font-semibold">
                     5% OFF
@@ -38,6 +41,15 @@ const DiscCard = () => {
                         <span className="flex gap-1 items-center">
                             <BiRightArrowAlt className="text-xl sm:text-2xl" /> Apply
                         </span>
+                    </div>
+                </div>
+                <div className=" bg-yellow-300 flex  justify-between font-bold text-[0.60rem] p-1">
+                    <div className="flex justify-start items-center">
+                        <MdFlashOn className='text-sm mx-1' />
+                        <h2> Flash sale</h2>
+                    </div>
+                    <div>
+                        Ends in 01 h 08 m 59 s
                     </div>
                 </div>
                 <div className="flex flex-col text-xs text-gray-500">
