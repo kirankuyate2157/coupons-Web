@@ -131,4 +131,13 @@ const EditCouponData = async (req, res) => {
     }
 };
 
-export { EditCouponData, newCoupon, getCouponData, applyCoupon, verifyCoupon };
+const getAllCoupons = async (req, res) => {
+    try {
+        const coupon = await Coupon.find({}).limit(req.query._end);
+
+        res.status(200).json(coupon);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+export { EditCouponData, newCoupon, getCouponData, applyCoupon, verifyCoupon, getAllCoupons };
