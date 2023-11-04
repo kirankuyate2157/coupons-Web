@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './../components/Navbar';
 import axios from 'axios';
-
+import DiscCard from '../components/DiscCard';
+import DummyCard from '../components/DummyCard';
+import { FiChevronRight } from "react-icons/fi"
 const CreateCoupons = () => {
     const [activeCoupons, setActiveCoupons] = useState([]);
     const [expiredCoupons, setExpiredCoupons] = useState([]);
@@ -62,34 +64,30 @@ const CreateCoupons = () => {
                 </div>
 
                 <div className="mb-4">
-                    <h2 className="text-xl font-semibold">Active Coupons</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {activeCoupons.map(coupon => (
-                            <div key={coupon._id} className="border p-4 rounded-lg shadow-md">
-                                <p className="text-xl font-semibold">{coupon.couponCode}</p>
-                                <p>Discount Type: {coupon.discountType}</p>
-                                <p>Expires on {new Date(coupon.expirationDate).toDateString()}</p>
-                                <p>Minimum Amount: ${coupon.minimumAmount}</p>
-                                <p>Created By: {coupon.createdBy}</p>
-                                <p>Max Usage Count: {coupon.maxUsageCount}</p>
-                            </div>
-                        ))}
+                    <div className="w-full">
+                        <div className="flex justify-start text-lg font-bold i p-1 text-bold items-center">
+                            <FiChevronRight className="text-2xl" />
+                            <h2>Active Coupons</h2>
+                        </div>
+                        <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
+                            {activeCoupons.map((coupon, index) => (
+                                <DummyCard key={index} data={coupon} />
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                <div>
-                    <h2 className="text-xl font-semibold">Expired Coupons</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {expiredCoupons.map(coupon => (
-                            <div key={coupon._id} className="border p-4 rounded-lg shadow-md">
-                                <p className="text-xl font-semibold">{coupon.couponCode}</p>
-                                <p>Discount Type: {coupon.discountType}</p>
-                                <p>Expired on {new Date(coupon.expirationDate).toDateString()}</p>
-                                <p>Minimum Amount: ${coupon.minimumAmount}</p>
-                                <p>Created By: {coupon.createdBy}</p>
-                                <p>Max Usage Count: {coupon.maxUsageCount}</p>
-                            </div>
-                        ))}
+                <div className="mb-4">
+                    <div className="w-full">
+                        <div className="flex justify-start text-lg font-bold i p-1 text-bold items-center">
+                            <FiChevronRight className="text-2xl" />
+                            <h2>Expired Coupons</h2>
+                        </div>
+                        <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
+                            {expiredCoupons.map((coupon, index) => (
+                                <DummyCard key={index} data={coupon} />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
