@@ -16,8 +16,8 @@ const Navbar = () => {
     };
 
     return (
-        <div className="bg-yellow-100">
-            <div className="flex font-mono flex-row justify-between mx-10">
+        <div className="bg-gray-100">
+            <div className="flex font-mono font-bold flex-row justify-between mx-10">
                 <div className="flex justify-center items-center gap-1 px-2 text-xl">
                     <BiSolidHot />
                     <h1> Hotbeans</h1>
@@ -35,10 +35,10 @@ const Navbar = () => {
                             % Sales  {location.pathname === '/seller' ? (<BiChevronUp className="flex text-2xl items-center" />) : (<BiChevronDown className="flex text-2xl items-center" />)}
 
                         </Link>
-                        <div className="flex justify-center items-center text-md gap-2">
+                        <Link to="/createCoupon" className={`flex justify-center items-center text-md gap-2 ${location.pathname === '/createCoupon' ? 'text-red-600' : ''}`}>
                             <BiSolidUser className="text-xl" />
                             <h2>Hi kiran</h2>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="relative flex items-center">
@@ -74,6 +74,10 @@ const Navbar = () => {
                             </Link>
                             <Link to="/seller" className={`text-lg rounded-lg px-2 hover:bg-yellow-50 hover:text-yellow-600  ${location.pathname === '/seller' ? 'text-red-600' : ''}`} onClick={closeMobileMenu}>
                                 % Sales
+                            </Link>
+                            <Link to="/createCoupon" className={`flex justify-center items-center text-md gap-2 text-lg rounded-lg px-2 hover:bg-yellow-50 hover:text-yellow-600  ${location.pathname === '/createCoupon' ? 'text-red-600' : ''}`} onClick={closeMobileMenu}>
+                                <BiSolidUser className="text-xl" />
+                                <h2>Hi kiran</h2>
                             </Link>
                         </div>
                     </div>

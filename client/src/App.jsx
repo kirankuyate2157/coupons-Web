@@ -1,8 +1,9 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Coupons from './pages/Coupons';
 import Cart from './pages/Cart';
 import Navbar from './components/Navbar';
+import CreateCoupons from './pages/CreateCoupons';
+import axios from 'axios';
 
 const NotFound = () => {
   return (<>
@@ -15,11 +16,14 @@ const NotFound = () => {
 };
 
 function App() {
+  axios.defaults.baseURL = "https://kirancoupons.onrender.com";
+  axios.defaults.params = {};
   return (
     <>
       <Routes>
         <Route path="/" element={<Coupons />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="createCoupon" element={<CreateCoupons />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
