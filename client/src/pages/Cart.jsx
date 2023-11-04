@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { BiPlus, BiMinus, BiSolidCartAlt, BiRightArrowAlt } from "react-icons/bi";
 
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import Coupons from './Coupons';
 
 const SummaryItem = () => {
     const [count, setCount] = useState(0)
