@@ -13,7 +13,6 @@ const DiscCard = ({ onClick }) => {
     }
     return (
         <div className="p-4 sm:p-5 font-sans border border-gray-400 bg-slate-50  shadow-lg rounded-lg sm:w-1/2 md:w-[48%] lg:w-[30%]"
-
             onClick={onClick}>
             <div className="flex flex-col gap-4 pb-2 ">
                 <div className="text-2xl sm:text-3xl font-semibold">

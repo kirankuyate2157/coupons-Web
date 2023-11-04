@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FaRegCopy } from "react-icons/fa";
-import { MdFlashOn } from "react-icons/md";
+import { MdFlashOn, MdDone } from "react-icons/md";
 
 const CountdownTimer = ({ expirationDate }) => {
     const [timeLeft, setTimeLeft] = useState(getTimeLeft());
@@ -57,17 +57,17 @@ const DummyCard = (props, { onClick, }) => {
         setIsTextCopy(true);
         setTimeout(() => {
             setIsTextCopy(false);
-        }, 7000);
+        }, 7000); // Reduce the time for the copy notification
     }
     const endDate = new Date(expirationDate).getTime();
     const timeDiff = endDate - new Date().getTime();
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const isFlashSale = days < 7;
+    const isFlashSale = days < 7 && timeDiff > 0;
 
     const discount = discountType === "percentage" ? <>{discountValue}% </> : <>${discountValue}</>;
 
     return (
-        <div className="p-4 sm:p-5 font-sans border border-gray-400 bg-slate-50  shadow-lg rounded-lg sm:w-1/2 md:w-[48%] lg:w-[30%]"
+        <div className="p-4 sm:p-5 font-sans border min-w-[300px] border-gray-400 bg-slate-50  shadow-lg rounded-lg sm:w-1/2 md:w-[48%] lg:w-[30%]"
 
             onClick={onClick}>
             <div className="flex flex-col gap-4 pb-2 ">
@@ -90,6 +90,7 @@ const DummyCard = (props, { onClick, }) => {
 
                             navigator.clipboard.writeText(couponCode);
                             copyInterval();
+
                         }}>
                             <FaRegCopy className={`text-md sm:text-lg ${isTextCopy ? "text-green-400" : "text-black"}`} /> Copy
                         </span>
@@ -118,6 +119,14 @@ const DummyCard = (props, { onClick, }) => {
                     </ul>
                 </div>
             </div>
+            {isTextCopy && (
+                <div className="fixed top-[16%] left-1/2 transform -translate-x-1/2 px-4 p-1 bg-green-700 text-white rounded-lg text-[0.60rem] md:text-xs  flex  items-center">
+                    <MdDone className="text-2xl mr-2" />
+                    <span>
+                        You successfully applied Code: NEWCUSTOMER_2023 to your cart
+                    </span>
+                </div>
+            )}
         </div>
     )
 }

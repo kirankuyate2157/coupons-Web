@@ -4,6 +4,8 @@ import axios from 'axios';
 import DiscCard from '../components/DiscCard';
 import DummyCard from '../components/DummyCard';
 import { FiChevronRight } from "react-icons/fi"
+import EditCoupon from '../components/EditeCoupon';
+import Coupons from './Coupons';
 const CreateCoupons = () => {
     const [activeCoupons, setActiveCoupons] = useState([]);
     const [expiredCoupons, setExpiredCoupons] = useState([]);
@@ -54,39 +56,72 @@ const CreateCoupons = () => {
     return (
         <div>
             <Navbar />
-            <div className="p-5">
-                <h1 className="text-2xl font-bold mb-4">Create Coupons</h1>
-                <div className="mb-4">
-                    <h2 className="text-xl font-semibold">Create New Coupon</h2>
-                    <div className="flex flex-col sm:flex-row items-center gap-2">
-                        {/* ... (your input fields) */}
+            <div className='sm:px-10 px-4'>
+                <div className=' flex w-full justify-center items-center  text-extrabold text-3xl p-10 '>
+                    <h1>Cart</h1>
+                </div>
+            </div>
+            {/*  coupon Cards */}
+            <div className='lg:flex-row flex flex-col-reverse  w-full opacity-100 transition-opacity lg:max-h-screen lg:overflow-y-auto justify-between'>
+                <div className=' w-full  md:p-6 '>
+                    <div className="w-full">
+                        <div className="mb-4">
+                            <div className="w-full">
+                                <div className="flex justify-start text-lg font-bold i p-1 text-bold items-center">
+                                    <FiChevronRight className="text-2xl" />
+                                    <h2>Active Coupons</h2>
+                                </div>
+                                <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
+                                    {activeCoupons.map((coupon, index) => (
+                                        <DummyCard key={index} data={coupon} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mb-4">
+                            <div className="w-full">
+                                <div className="flex justify-start text-lg font-bold i p-1 text-bold items-center">
+                                    <FiChevronRight className="text-2xl" />
+                                    <h2>Expired Coupons</h2>
+                                </div>
+                                <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
+                                    {expiredCoupons.map((coupon, index) => (
+                                        <DummyCard key={index} data={coupon} />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {/* create new coupons */}
 
-                <div className="mb-4">
-                    <div className="w-full">
-                        <div className="flex justify-start text-lg font-bold i p-1 text-bold items-center">
-                            <FiChevronRight className="text-2xl" />
-                            <h2>Active Coupons</h2>
-                        </div>
-                        <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
-                            {activeCoupons.map((coupon, index) => (
-                                <DummyCard key={index} data={coupon} />
-                            ))}
-                        </div>
+                <div className='w-full lg:w-[650px] p-2 mb-5 md:p-6  lg:sticky top-2 '>
+                    <div className="flex justify-start text-lg font-bold i p-1 text-bold items-center">
+                        <FiChevronRight className="text-2xl" />
+                        <h2>Create Coupons</h2>
                     </div>
-                </div>
+                    <div className='flex justify-center md:justify-end'>
+                        <EditCoupon />
+                        <div className="w-1/2 mx-2 hidden  md:flex lg:hidden font-mono">
+                            <div className="rounded-lg p-4 md:p-6 ">
+                                <h2 className="text-xl font-semibold mb-4">How to Create and Share Coupons</h2>
+                                <ul className="pl-5 list-disc">
+                                    <li className="mb-2">
+                                        Fill in Coupon Details
+                                    </li>
+                                    <li className=" mb-4">Start by entering the coupon details.</li>
+                                    <li className="mb-2">
+                                        Review and Confirm
+                                    </li>
+                                    <li className=" mb-4">Review the entered coupon details and confirm the creation.</li>
+                                    <li className="mb-2">
+                                        Share Coupons
+                                    </li>
+                                    <li className="">Once the coupon is created, share it with others through various means, such as email, social media, or other communication channels.</li>
+                                </ul>
 
-                <div className="mb-4">
-                    <div className="w-full">
-                        <div className="flex justify-start text-lg font-bold i p-1 text-bold items-center">
-                            <FiChevronRight className="text-2xl" />
-                            <h2>Expired Coupons</h2>
-                        </div>
-                        <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
-                            {expiredCoupons.map((coupon, index) => (
-                                <DummyCard key={index} data={coupon} />
-                            ))}
+                            </div>
                         </div>
                     </div>
                 </div>
