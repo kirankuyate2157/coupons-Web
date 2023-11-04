@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './../components/Navbar';
 import axios from 'axios';
-import DiscCard from '../components/DiscCard';
 import DummyCard from '../components/DummyCard';
 import { FiChevronRight } from "react-icons/fi"
 import EditCoupon from '../components/EditeCoupon';
-import Coupons from './Coupons';
 const CreateCoupons = () => {
     const [activeCoupons, setActiveCoupons] = useState([]);
     const [expiredCoupons, setExpiredCoupons] = useState([]);
@@ -24,15 +22,49 @@ const CreateCoupons = () => {
             .then((response) => {
                 const coupons = response.data;
                 const currentDate = new Date();
-                const active = coupons.filter(coupon => new Date(coupon.expirationDate) > currentDate);
-                const expired = coupons.filter(coupon => new Date(coupon.expirationDate) <= currentDate);
+                const sortedCoupons = coupons.map(coupon => {
+                    // Calculate the date difference in milliseconds
+                    const dateDifference = new Date(coupon.expirationDate) - currentDate;
+                    // Add the dateDifference as a new property to the coupon object
+                    return { ...coupon, dateDifference };
+                });
+                // Sort the coupons by dateDifference in ascending order
+                const sortedByDate = sortedCoupons.sort((a, b) => a.dateDifference - b.dateDifference);
+                // Split the coupons into active and expired based on dateDifference
+                const active = sortedByDate.filter(coupon => coupon.dateDifference > 0);
+                const expired = sortedByDate.filter(coupon => coupon.dateDifference <= 0);
                 setActiveCoupons(active);
                 setExpiredCoupons(expired);
+                // console.log("active : ", active);
+                // console.log("expired : ", expired);
             })
             .catch((error) => {
                 console.error('Error fetching coupons: ', error);
             });
+
+        // const applyCoupon = () => {
+        //     // Verify and apply the coupon by making a POST API request
+        //     const bodyData = {
+        //         "couponCode": "J54KEV8142",
+        //         "orderTotal": 500.87
+        //     };
+
+        //     axios
+        //     axios.get('/kkcoupon/api/v1/coupons/verify')
+        //         .then((response) => {
+        //             // Handle the API response and set the discount
+        //             console.log("applied disc ", response.data.discountAmount);
+        //         })
+        //         .catch((error) => {
+        //             console.log("error body data: ", bodyData, JSON.stringify(error));
+        //             // Handle errors here (e.g., invalid coupon code)
+        //             console.log("Invalid coupon code");
+
+        //         });
+        // };
+        // applyCoupon();
     }, []);
+
 
     const handleCreateCoupon = () => {
         axios.post('/kkcoupon/api/v1/coupons', newCoupon)

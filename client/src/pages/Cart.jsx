@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 import { BiPlus, BiMinus, BiSolidCartAlt, BiRightArrowAlt } from "react-icons/bi";
 
 import { MdOutlineDeleteOutline } from "react-icons/md";
@@ -36,6 +37,26 @@ const SummaryItem = () => {
 
 const OrderSummary = () => {
     const [couponValue, setCouponValue] = useState("");
+    const [discount, setDiscount] = useState(0);
+
+    const applyCoupon = () => {
+        // Verify and apply the coupon by making a POST API request
+        const bodyData = { couponCode: "J54KEV8142", orderTotal: 500.87 };
+
+        axios
+            .get("/kkcoupon/api/v1/coupons/verify", bodyData)
+            .then((response) => {
+                // Handle the API response and set the discount
+                setDiscount(response.data.discountAmount);
+            })
+            .catch((error) => {
+                console.log("error body data: ", bodyData, JSON.stringify(error));
+                // Handle errors here (e.g., invalid coupon code)
+                alert("Invalid coupon code");
+                setDiscount(0);
+            });
+    };
+
     return <>
         <div className='flex text-xs md:text-sm border border-gray-500 p-5 rounded-md flex-col gap-5'>
             <div className=" flex justify-between">
@@ -52,14 +73,15 @@ const OrderSummary = () => {
                     <input value={couponValue} name="couponCode" className="w-full focus:outline-none px1 "
                         onChange={(e) => { setCouponValue(e.target.value) }}
                     />
-                    < BiRightArrowAlt className="bg-black text-white h-full text-4xl" />
+                    < BiRightArrowAlt className="bg-black text-white h-full text-4xl"
+                        onClick={() => { applyCoupon() }} />
                 </div>
             </div>
             <div className="text-xs md:text-sm">
                 <h3>Promotions:</h3>
                 <div className=" p-1 flex justify-between items-center w-full">
                     <h3 className="flex border px-2 bg-gray-300 boarder border-violet-950 text-violet-950 rounded gap-1 items-center"><BiSolidCartAlt /> NEWSALE_12A4 <span>(-5%)</span></h3>
-                    <h3 className="text-green-400 ">-$5.87</h3>
+                    <h3 className="text-green-400 ">-${discount}</h3>
                 </div>
             </div>
             <hr className=' border-gray-400 my-1' />
