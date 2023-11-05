@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BiSolidHot, BiChevronDown, BiChevronUp, BiSolidUser, BiSolidCartAlt, BiMenu } from 'react-icons/bi';
 import { GrClose } from 'react-icons/gr';
 
-const Navbar = () => {
+const Navbar = ({ cartItem = 0 }) => {
     const location = useLocation();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -14,6 +15,10 @@ const Navbar = () => {
     const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
     };
+    useEffect(() => {
+        const cartCount = localStorage.getItem("cartCount");
+        setCartCount(cartCount);
+    })
 
     return (
         <div className="bg-gray-100">
@@ -55,7 +60,7 @@ const Navbar = () => {
                                     alignItems: 'center',
                                 }}
                             >
-                                3
+                                {cartCount}
                             </span>
                         </Link>
                     </div>

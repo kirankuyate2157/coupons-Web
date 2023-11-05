@@ -86,9 +86,9 @@ const SummaryItem = ({ name, description, price, quantity, onRemove, onQuntity }
 const OrderSummary = ({ totalPrice }) => {
     const [couponValue, setCouponValue] = useState("");
     const [subtotal, setSubtotal] = useState(totalPrice | 0);
+    const [appliedDiscount, setAppliedDiscount] = useState(totalPrice | 0);
     const [discount, setDiscount] = useState(0);
     const [discData, setDiscData] = useState("");
-    const [appliedDiscount, setAppliedDiscount] = useState(totalPrice | 0);
     const [errorMessage, setErrorMessage] = useState("");
     const [isError, setIsError] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -107,9 +107,10 @@ const OrderSummary = ({ totalPrice }) => {
     };
     useEffect(() => {
         setSubtotal(totalPrice);
-        setAppliedDiscount(subtotal);
         if (subtotal > 0 && couponValue)
             applyCoupon();
+        else
+            setAppliedDiscount(totalPrice);
     }, [totalPrice])
     const applyCoupon = () => {
         // Verify and apply the coupon by making a POST API request
@@ -140,6 +141,8 @@ const OrderSummary = ({ totalPrice }) => {
             .catch((error) => {
                 console.log("error body data: ", JSON.stringify(error));
                 // Handle errors here (e.g., invalid coupon code)
+                setDiscount(0);
+                appliedDiscount(subtotal);
                 setErrorMessage(error.response.data.error);
                 handleShowError();
                 // alert("Invalid coupon code");
@@ -205,7 +208,7 @@ const Cart = () => {
 
     const calculateTotalPrice = () => {
 
-        const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        const total = cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
         setTotalPrice(total);
         return total;
     };
@@ -237,7 +240,10 @@ const Cart = () => {
         setCartItems(updatedCart);
 
     };
+    useEffect(() => {
+        localStorage.setItem("cartCount", JSON.stringify(cartItems.length));
 
+    }, [cartItems.length])
     useEffect(() => {
         calculateTotalPrice();
 
