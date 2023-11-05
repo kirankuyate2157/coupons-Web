@@ -42,27 +42,27 @@ const CreateCoupons = () => {
                 console.error('Error fetching coupons: ', error);
             });
 
-        // const applyCoupon = () => {
-        //     // Verify and apply the coupon by making a POST API request
-        //     const bodyData = {
-        //         "couponCode": "J54KEV8142",
-        //         "orderTotal": 500.87
-        //     };
+        const applyCoupon = () => {
+            // Verify and apply the coupon by making a POST API request
+            const bodyData = {
+                couponCode: "J54KEV8142",
+                orderTotal: 500.87
+            };
 
-        //     axios
-        //     axios.get('/kkcoupon/api/v1/coupons/verify')
-        //         .then((response) => {
-        //             // Handle the API response and set the discount
-        //             console.log("applied disc ", response.data.discountAmount);
-        //         })
-        //         .catch((error) => {
-        //             console.log("error body data: ", bodyData, JSON.stringify(error));
-        //             // Handle errors here (e.g., invalid coupon code)
-        //             console.log("Invalid coupon code");
+            axios
+            axios.post('/kkcoupon/api/v1/coupons/apply')
+                .then((response) => {
+                    // Handle the API response and set the discount
+                    console.log("applied disc ", response.data.discountAmount);
+                })
+                .catch((error) => {
+                    console.log("error body data: ", bodyData, JSON.stringify(error));
+                    // Handle errors here (e.g., invalid coupon code)
+                    console.log("Invalid coupon code");
 
-        //         });
-        // };
-        // applyCoupon();
+                });
+        };
+        applyCoupon();
     }, []);
 
 
@@ -90,7 +90,7 @@ const CreateCoupons = () => {
             <Navbar />
             <div className='sm:px-10 px-4'>
                 <div className=' flex w-full justify-center items-center  text-extrabold text-3xl p-10 '>
-                    <h1>Cart</h1>
+                    <h1>Make  Coupons </h1>
                 </div>
             </div>
             {/*  coupon Cards */}
