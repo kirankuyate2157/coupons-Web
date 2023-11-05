@@ -25,21 +25,16 @@ const verifyCoupon2 = async (req, res) => {
 
         const currentDate = new Date();
         if (currentDate > coupon.expirationDate) {
-            return res.status(400).json({ error: 'Coupon is expired' });
+            return res.status(404).json({ error: 'Coupon is expired' });
         }
         if (coupon.maxUsageCount <= 0) {
-            return res.status(400).json({ error: 'Coupon has reached its maximum usage limit' });
+            return res.status(404).json({ error: 'Coupon has reached its maximum usage limit' });
         }
 
         if (orderTotal < coupon.minimumAmount) {
-            return res.status(400).json({ error: `Minimum order amount ${coupon.minimumAmount} criteria not met` });
+            return res.status(404).json({ error: `Minimum order amount ${coupon.minimumAmount} criteria not met` });
         }
 
-        // If maxUsageCount is greater than 0, decrement it.
-        // if (coupon.maxUsageCount > 0) {
-        //     coupon.maxUsageCount--;
-        //     await coupon.save();
-        // }
 
         let appliedDiscount = 0;
         if (coupon.discountType === 'percentage') {
@@ -48,7 +43,7 @@ const verifyCoupon2 = async (req, res) => {
             appliedDiscount = coupon.discountValue;
         }
 
-        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, });
+        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, "expirationDate": coupon.expirationDate, "minimumAmount": coupon.minimumAmount });
     } catch (error) {
         res.status(500).json({ error: 'Coupon verification failed' });
     }
@@ -80,7 +75,6 @@ const verifyCoupon = async (req, res) => {
         //     coupon.maxUsageCount--;
         //     await coupon.save();
         // }
-
         let appliedDiscount = 0;
         if (coupon.discountType === 'percentage') {
             appliedDiscount = (coupon.discountValue / 100) * orderTotal;
@@ -88,7 +82,7 @@ const verifyCoupon = async (req, res) => {
             appliedDiscount = coupon.discountValue;
         }
 
-        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, });
+        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, "expirationDate": coupon.expirationDate, "minimumAmount": coupon.minimumAmount });
     } catch (error) {
         res.status(500).json({ error: 'Coupon verification failed' });
     }
@@ -129,7 +123,7 @@ const applyCoupon = async (req, res) => {
             appliedDiscount = coupon.discountValue;
         }
 
-        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, });
+        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, "expirationDate": coupon.expirationDate, "minimumAmount": coupon.minimumAmount });
     } catch (error) {
         res.status(500).json({ error: 'Coupon application failed' });
     }

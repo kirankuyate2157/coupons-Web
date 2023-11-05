@@ -41,7 +41,7 @@ const Coupons = () => {
                         <h2>Unlock more coupons</h2>
                     </div>
                     <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
-                        <DiscCard onClick={() => { showNotifications() }} />
+                        <DiscCard onClick={handleShowNotification} />
                         <DiscCard onClick={handleShowNotification} />
                         <DiscCard onClick={handleShowNotification} />
                         <DiscCard onClick={handleShowNotification} />

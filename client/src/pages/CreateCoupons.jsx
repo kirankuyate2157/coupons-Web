@@ -42,27 +42,7 @@ const CreateCoupons = () => {
                 console.error('Error fetching coupons: ', error);
             });
 
-        const applyCoupon = () => {
-            // Verify and apply the coupon by making a POST API request
-            const bodyData = {
-                couponCode: "J54KEV8142",
-                orderTotal: 500.87
-            };
 
-            axios
-            axios.post('/kkcoupon/api/v1/coupons/apply')
-                .then((response) => {
-                    // Handle the API response and set the discount
-                    console.log("applied disc ", response.data.discountAmount);
-                })
-                .catch((error) => {
-                    console.log("error body data: ", bodyData, JSON.stringify(error));
-                    // Handle errors here (e.g., invalid coupon code)
-                    console.log("Invalid coupon code");
-
-                });
-        };
-        applyCoupon();
     }, []);
 
 
