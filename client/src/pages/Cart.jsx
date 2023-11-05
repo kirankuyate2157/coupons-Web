@@ -37,20 +37,27 @@ const SummaryItem = () => {
 
 const OrderSummary = () => {
     const [couponValue, setCouponValue] = useState("");
+    const [subtotal, setSubtotal] = useState(98);
     const [discount, setDiscount] = useState(0);
 
     const applyCoupon = () => {
         // Verify and apply the coupon by making a POST API request
-        const bodyData = { couponCode: "J54KEV8142", orderTotal: 500.87 };
-
-        axios
-            .get("/kkcoupon/api/v1/coupons/verify", bodyData)
+        // const bodyData = { couponCode: "J54KEV8142", orderTotal: 500.87 };
+        if (!couponValue && !subtotal) {
+            console.log("provide valid data..");
+        } else {
+            console.log(`veifying coupon code: ${couponValue} for the amaunt:${subtotal} `);
+        }
+        axios.get(`/kkcoupon/api/v1/coupons/verify/${couponValue}/${subtotal}`)
             .then((response) => {
                 // Handle the API response and set the discount
-                setDiscount(response.data.discountAmount);
+                const data = response.data;
+                console.log("data  disc .. got : ", data);
+                setDiscount(data.appliedDiscount);
+
             })
             .catch((error) => {
-                console.log("error body data: ", bodyData, JSON.stringify(error));
+                console.log("error body data: ", JSON.stringify(error));
                 // Handle errors here (e.g., invalid coupon code)
                 alert("Invalid coupon code");
                 setDiscount(0);
@@ -80,17 +87,17 @@ const OrderSummary = () => {
             <div className="text-xs md:text-sm">
                 <h3>Promotions:</h3>
                 <div className=" p-1 flex justify-between items-center w-full">
-                    <h3 className="flex border px-2 bg-gray-300 boarder border-violet-950 text-violet-950 rounded gap-1 items-center"><BiSolidCartAlt /> NEWSALE_12A4 <span>(-5%)</span></h3>
+                    <h3 className="flex border px-2 bg-gray-300 boarder border-violet-950 text-violet-950 rounded gap-1 items-center"><BiSolidCartAlt /> {couponValue} <span>(-5%)</span></h3>
                     <h3 className="text-green-400 ">-${discount}</h3>
                 </div>
             </div>
             <hr className=' border-gray-400 my-1' />
             <div className=" flex justify-between items-center">
-                <h3>Subtotal: </h3>
-                <h3 className="text-green-500 ">$93.87</h3>
+                <h3>applied subtotal: </h3>
+                <h3 className="text-green-500 ">${subtotal - discount}</h3>
             </div>
             <div className=" flex justify-between">
-                <h3>Subtotal: </h3>
+                <h3>Final total: </h3>
                 <h3>$93.87</h3>
             </div>
         </div>

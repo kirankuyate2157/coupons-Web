@@ -48,7 +48,7 @@ const verifyCoupon2 = async (req, res) => {
             appliedDiscount = coupon.discountValue;
         }
 
-        res.json({ appliedDiscount });
+        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, });
     } catch (error) {
         res.status(500).json({ error: 'Coupon verification failed' });
     }
@@ -88,7 +88,7 @@ const verifyCoupon = async (req, res) => {
             appliedDiscount = coupon.discountValue;
         }
 
-        res.json({ appliedDiscount });
+        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, });
     } catch (error) {
         res.status(500).json({ error: 'Coupon verification failed' });
     }
@@ -129,7 +129,7 @@ const applyCoupon = async (req, res) => {
             appliedDiscount = coupon.discountValue;
         }
 
-        res.json({ appliedDiscount });
+        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, });
     } catch (error) {
         res.status(500).json({ error: 'Coupon application failed' });
     }
@@ -169,7 +169,7 @@ const applyCoupon2 = async (req, res) => {
             appliedDiscount = coupon.discountValue;
         }
 
-        res.json({ appliedDiscount });
+        res.json({ "discount": appliedDiscount, "discountType": coupon.discountType, "discountValue": coupon.discountValue, "couponCode": coupon.couponCode, });
     } catch (error) {
         res.status(500).json({ error: 'Coupon application failed' });
     }
