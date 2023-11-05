@@ -52,12 +52,22 @@ const FormatDateTime = ({ dateTime }) => {
 
 const DummyCard = (props, { onClick, }) => {
     const [isTextCopy, setIsTextCopy] = useState(false);
+    const [isNotify, setIsNotify] = useState(false);
+
     const { couponCode, discountType, discountValue, expirationDate, minimumAmount, createdBy, maxUsageCount } = props.data;
     const copyInterval = () => {
         setIsTextCopy(true);
+        notifyInterval();
         setTimeout(() => {
             setIsTextCopy(false);
-        }, 7000); // Reduce the time for the copy notification
+        }, 7000);
+    }
+
+    const notifyInterval = () => {
+        setIsNotify(true);
+        setTimeout(() => {
+            setIsNotify(false);
+        }, 3000);
     }
     const endDate = new Date(expirationDate).getTime();
     const timeDiff = endDate - new Date().getTime();
@@ -119,11 +129,11 @@ const DummyCard = (props, { onClick, }) => {
                     </ul>
                 </div>
             </div>
-            {isTextCopy && (
+            {isNotify && (
                 <div className="fixed top-[16%] left-1/2 transform -translate-x-1/2 px-4 p-1 bg-green-700 text-white rounded-lg text-[0.60rem] md:text-xs  flex  items-center">
                     <MdDone className="text-2xl mr-2" />
                     <span>
-                        You successfully applied Code: NEWCUSTOMER_2023 to your cart
+                        {`Coupon code ${couponCode} is copied to your clipboard ... `}
                     </span>
                 </div>
             )}

@@ -42,6 +42,25 @@ const EditCoupon = ({ coupon, onSave, onCancel, isNew }) => {
     });
     const [isWarning, setIsWarning] = useState(false);
     const [success, setSuccess] = useState(false);
+
+
+    const handleShowWarning = () => {
+        setIsWarning(true);
+        console.log("warning >>>");
+        setTimeout(() => {
+            setIsWarning(false);
+        }, 1000);
+    };
+    const handleSuccess = () => {
+        setSuccess(true);
+        console.log("sucessss >>>");
+        setTimeout(() => {
+            setSuccess(false);
+        }, 3000);
+    };
+
+
+
     if (!coupon) isNew = true;
     const handleSave = () => {
         if (
@@ -105,18 +124,7 @@ const EditCoupon = ({ coupon, onSave, onCancel, isNew }) => {
         onCancel(isNew);
     };
 
-    const handleShowWarning = () => {
-        setIsWarning(true);
-        setTimeout(() => {
-            setIsWarning(false);
-        }, 1000);
-    };
-    const handleSuccess = () => {
-        setSuccess(true);
-        setTimeout(() => {
-            setSuccess(false);
-        }, 3000);
-    };
+
 
     const genrateCode = () => {
         const code = generateCouponCode(10, 4);
@@ -227,15 +235,16 @@ const EditCoupon = ({ coupon, onSave, onCancel, isNew }) => {
                     </button>
                 </div>
                 {isWarning && (
-                    <div className="fixed top-[16%] left-1/2 transform -translate-x-1/2 px-4 p-1 bg-yellow-400 text-white rounded-lg text-[0.80rem] md:text-xs flex items-center">
+                    <div className="fixed top-[16%] left-1/2 transform -translate-x-1/2 px-4 p-1 bg-yellow-400 text-white rounded-lg text-[0.80rem] md:text-xs flex items-center z-30">
                         <PiSealWarningDuotone className="text-2xl mr-2" />
                         <span>Please enter valid data.</span>
                     </div>
                 )}
-                {success && (<div className="fixed top-[16%] left-1/2 transform -translate-x-1/2 px-4 p-1 bg-green-600 text-white rounded-lg text-[0.80rem] md:text-xs flex items-center">
-                    <MdDone className="text-2xl mr-2" />
-                    <span>Successfully done</span>
-                </div>)
+                {success && (
+                    <div className="fixed top-[16%] left-1/2 transform -translate-x-1/2 px-4 p-1 bg-green-700 text-white rounded-lg text-[0.60rem] md:text-xs  flex  items-center">
+                        <MdDone className="text-2xl mr-2" />
+                        <span>Successfully done</span>
+                    </div>)
                 }
             </div>
         </div>

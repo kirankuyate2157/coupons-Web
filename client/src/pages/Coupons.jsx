@@ -3,15 +3,24 @@ import Navbar from '../components/Navbar';
 import { FiChevronRight } from "react-icons/fi";
 import { MdDone } from "react-icons/md"
 import DiscCard from '../components/DiscCard';
+import { useCouponData } from '../context/DataProvider';
+import DummyCard from '../components/DummyCard';
 
 const Coupons = () => {
+    const coupons = useCouponData();
+
     const [isNotify, setIsNotify] = useState(false);
-    const handleShowNotification = () => {
-        setIsNotify(true);
-        setTimeout(() => {
-            setIsNotify(false);
-        }, 4000);
-    };
+    // const [coupons, setCoupons] = useState([...data]);
+
+    // const handleShowNotification = () => {
+    //     setIsNotify(true);
+    //     setTimeout(() => {
+    //         setIsNotify(false);
+    //     }, 4000);
+    // };
+
+
+    // console.log("this is context coupns data :", coupons);
     return (
         <div className=" font-mono ">
             <Navbar />
@@ -25,14 +34,9 @@ const Coupons = () => {
                         <h2>My Coupons</h2>
                     </div>
                     <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
+                        {coupons.map((coupon, index) => (
+                            <DummyCard key={index} data={coupon} />
+                        ))}
                     </div>
                 </div>
                 <div className="w-full my-4 ">
@@ -41,14 +45,9 @@ const Coupons = () => {
                         <h2>Unlock more coupons</h2>
                     </div>
                     <div className=" p-3 px-5 flex flex-wrap  gap-4 justify-start">
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
-                        <DiscCard onClick={handleShowNotification} />
+                        {coupons.map((coupon, index) => (
+                            <DummyCard key={index} data={coupon} />
+                        ))}
                     </div>
                 </div>
             </div>

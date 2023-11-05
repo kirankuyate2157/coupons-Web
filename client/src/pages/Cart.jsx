@@ -243,7 +243,8 @@ const Cart = () => {
     useEffect(() => {
         localStorage.setItem("cartCount", JSON.stringify(cartItems.length));
 
-    }, [cartItems.length])
+    }, [cartItems.length]);
+
     useEffect(() => {
         calculateTotalPrice();
 
@@ -259,7 +260,7 @@ const Cart = () => {
                 </div>
                 <div className='lg:flex-row flex flex-col-reverse  w-full  justify-between'>
                     <div className=' w-full lg:w-[60%] md:p-6'>
-                        <h2 className='my-2'>Item summary({cartItems.length}) {totalPrice}</h2>
+                        <h2 className='my-2'>Item summary({cartItems.length})</h2>
                         <hr className=' border-gray-400 my-2' />
                         {cartItems.map((item, index) => (
                             <SummaryItem
