@@ -6,6 +6,7 @@ import CreateCoupons from './pages/CreateCoupons';
 import axios from 'axios';
 import { DataProvider } from './context/DataProvider';
 import { useState, useEffect } from 'react';
+import PersonalInfo from './components/PersonalInfo';
 
 const NotFound = () => {
   return (<>
@@ -49,6 +50,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Coupons />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/cart/info" element={<PersonalInfo />} />
+
           <Route path="createCoupon" element={<CreateCoupons />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

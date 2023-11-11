@@ -4,6 +4,7 @@ import axios from "axios";
 import { BiPlus, BiMinus, BiSolidCartAlt, BiRightArrowAlt } from "react-icons/bi";
 import { PiSealWarningDuotone } from "react-icons/pi";
 import { MdOutlineDeleteOutline, MdCelebration } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const cartItemes = [
     {
@@ -278,9 +279,9 @@ const Cart = () => {
                         <h2 className='my-3'>Order summary</h2>
 
                         <OrderSummary totalPrice={totalPrice} />
-                        <div className=' flex justify-center rounded-lg text-white bg-black hover:bg-slate-800 my-4'>
+                        <Link to="/cart/info" className=' flex justify-center rounded-lg text-white bg-black hover:bg-slate-800 my-4'>
                             <h2 className='p-3'> CheckOut</h2>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>
