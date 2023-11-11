@@ -22,8 +22,8 @@ const CartItems = () => {
 }
 const PersonalInfo = () => {
     return (
-        <div className="flex md:flex-row font-mono flex-col justify-evenly  w-full gap-10  ">
-            <div className=' w-full flex flex-col pb-5 px-5 py-3  overflow-y-auto bg-blue-100 gap-5 md:gap-10'>
+        <div className="flex md:flex-row font-mono flex-col justify-evenly   w-full min-h-screen  ">
+            <div className=' w-full flex flex-col  px-5 md:px-10 py-3 pb-6 md:pb-1  overflow-y-auto bg-blue-100 gap-5 md:gap-10'>
                 <div className="flex justify-start">
                     <div className="flex justify-center items-center gap-1 px-2 text-2xl">
                         <BiSolidHot />
@@ -107,7 +107,7 @@ const PersonalInfo = () => {
                 </div>
                 <div>
                 </div>
-                <div className=' flex flex-col sm:flex-row justify-around items-center text-xs md:text-sm  gap-2 mx-8'>
+                <div className=' flex flex-col md:pb-3 sm:flex-row justify-around items-center text-xs md:text-sm  gap-2 mx-8'>
                     <h2 className='p-3 w-full items-center flex cursor-pointer justify-center rounded-lg text-white bg-black hover:bg-slate-800'> Continue to Shipping</h2>
                     <Link to="/cart" className='p-3 w-full items-center flex justify-center sm:justify-end pr-2 gap-2 '>
                         <BiArrowBack className="text-xl cursor-pointer font-bold" />
@@ -115,7 +115,7 @@ const PersonalInfo = () => {
                     </Link>
                 </div>
             </div>
-            <div className='w-full gap-3 flex flex-col pr-10 px-5 md:pl-2 md:px-3 opacity-100 transition-opacity max-h-screen overflow-y-auto md:pt-6 '>
+            <div className='w-full gap-3 flex flex-col pr-10 px-5 md:px-10  md:pl-5  opacity-100 transition-opacity max-h-screen overflow-y-auto md:pt-6 '>
                 <CartItems />  <CartItems />  <CartItems />  <CartItems />  <CartItems />
                 <hr className='border-gray-400 my-2' />
                 <div className='w-full flex flex-col md:pl-2 pb-10 text-xs md:text-sm  gap-5'>
